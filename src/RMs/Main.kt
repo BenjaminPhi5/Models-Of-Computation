@@ -8,5 +8,6 @@ fun main(args: Array<String>) {
     testCombineMultipleAdd()
     testXmult4()
     testSingleAlias()
+    printU()
 }
 
