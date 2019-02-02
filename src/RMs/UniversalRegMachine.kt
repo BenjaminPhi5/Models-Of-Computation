@@ -90,7 +90,7 @@ val U = combiner(arrayOf(push0toA, assignTP, popTtoN, popAtoR0, decPC, popNtoC, 
         hashMapOf(popTtoN to popAtoR0, decPC to popNtoC, popNtoC to popAtoR0, popAtoR to decCeven,
                 decCeven to incR, popStoR to assignTP, decCodd to incN, popNtoPC to decR, decR to assignPCN))
 
-val prog = U.combine()
+val prog = U.combine() // this also calculates all the aliases for the modules and retains them
 
 // This prints out the register machine code for the Universal Register Machine!!!!
 fun printU() {
@@ -110,5 +110,5 @@ fun runUniversalMachine(progToSimulate : Array<Body>, initialRegs : Array<Long>)
 
 fun sampleProgram(){
     // does addition of 4 and 5 in the universal register machine
-    runUniversalMachine(getAdd(), arrayOf(0,4,5))
+    runUniversalMachine(getConst2(), arrayOf(0, 4, 5))
 }

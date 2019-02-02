@@ -118,3 +118,41 @@ fun testCombineMultipleAdd(){
 
     println(machine.regs)
 }
+//enum class Regs{ANS, P, A,   PC, N, C, R, S,  T, Z, L, X}
+// values i want{0,    0, 276, 0,  9, 0, 2, 34, 0, 0, 0, 0}
+
+fun testAssign(){
+    var machine = RegisterMachine(assignSR, arrayOf(0,    0, 0, 0,  0, 0, 5, 3, 0, 0, 0, 0), true)
+    machine.run()
+    println(machine.regs)
+    machine = RegisterMachine(assignPCN.prog, arrayOf(0,    0, 0, 0,  9, 0, 5, 3, 0, 0, 0, 0), true)
+    machine.run()
+    println("{0  , P  , A  , PC , N  , C  , R  , S  , T  , Z  , L  , X  }")
+    println(machine.regs)
+}
+
+fun testPush(){
+    var machine = RegisterMachine(pushRtoS.prog, arrayOf(0,    0, 0, 0,  9, 0, 2, 34, 0, 0, 0, 0), true)
+    machine.run()
+    println(machine.regs)
+}
+
+fun testPop(){
+    var machine = RegisterMachine(popAtoR0.prog, arrayOf(9,    0, 276, 0,  9, 0, 50, 8, 0, 0, 0, 0), true)
+    machine.run()
+    println(machine.regs)
+}
+
+fun testEncodeDecode(){
+    println("encoded value: ${encodeProgram(getAdd())}")
+    printProgram(getConst2())
+    println("-----------------\n--------------")
+    printProgram(decodeProgram(encodeProgram(getConst2())))
+}
+
+fun getConst2() : Array<Body> {
+    val l0 = BodyOp(Operation.ADD, 0, 1, null)
+    val l1 = BodyOp(Operation.ADD, 0, 2, null)
+    val l2 = Body(Operation.HALT)
+    return arrayOf(l0, l1, l2)
+}

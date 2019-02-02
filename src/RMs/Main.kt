@@ -16,6 +16,10 @@ fun main(args: Array<String>) {
     testEncodeProgram()
     testEncodeBody()
     sampleProgram()
+    testAssign()
+    testPush()
+    testPop()
+    testEncodeDecode()
 
 }
 
