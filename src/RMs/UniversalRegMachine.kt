@@ -97,7 +97,18 @@ fun printU() {
         printProgram(prog)
 }
 
-// This prints out the register machine program
+fun runUniversalMachine(progToSimulate : Array<Body>, initialRegs : Array<Long>){
 
+    val machine = RegisterMachine(prog, arrayOf(0, encodeProgram(progToSimulate), encodeList(initialRegs, 0)),
+            true)
 
-// These methods encode a register machine program and its input as a number
+    machine.run()
+
+    println(machine.regs)
+
+}
+
+fun sampleProgram(){
+    // does addition of 4 and 5 in the universal register machine
+    runUniversalMachine(getAdd(), arrayOf(0,4,5))
+}

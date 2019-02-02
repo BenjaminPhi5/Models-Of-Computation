@@ -79,6 +79,7 @@ class combiner(var modules : Array<Module>, val haltMap : HashMap<Module, Module
         // Then, get indexes for each module in the final program
         setupIndexes()
         println(progIndexes)
+        println(progIndexes.size)
 
         // Now, build up the new prog
         var finalProg : ArrayList<Body> = ArrayList()

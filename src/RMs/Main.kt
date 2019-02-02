@@ -2,6 +2,7 @@ package RMs
 
 fun main(args: Array<String>) {
     println("Hello World")
+    /*
     testAdd()
     testEnumValues()
     testCombineSinge()
@@ -9,5 +10,12 @@ fun main(args: Array<String>) {
     testXmult4()
     testSingleAlias()
     printU()
+    */
+    testpairs()
+    testList()
+    testEncodeProgram()
+    testEncodeBody()
+    sampleProgram()
+
 }
 
