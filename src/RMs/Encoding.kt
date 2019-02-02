@@ -50,7 +50,8 @@ fun encodeBody(b : Body) : Long {
         val opBody = b as BodyOp
         when(opBody.op) {
             Operation.ADD -> return __xpairy__(2L* opBody.reg, 1L * opBody.l1)
-            Operation.SUB -> return __xpairy__(2 * opBody.reg + 1L, _xpairy_(1L*opBody.l1, 1L*opBody.l2!!))
+            Operation.SUB -> return __xpairy__(2 * opBody.reg + 1L, _xpairy_(opBody.l1.toLong(),
+                    1L*opBody.l2!!.toLong()))
         }
     }
     println("shouldnt have got to here:")

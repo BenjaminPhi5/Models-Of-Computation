@@ -104,11 +104,11 @@ fun runUniversalMachine(progToSimulate : Array<Body>, initialRegs : Array<Long>)
 
     machine.run()
 
-    println(machine.regs)
+    println("regs: ${machine.regs}")
 
 }
 
 fun sampleProgram(){
     // does addition of 4 and 5 in the universal register machine
-    runUniversalMachine(getConst2(), arrayOf(0, 4, 5))
+    runUniversalMachine(getConst3(), arrayOf(1,1,1))
 }

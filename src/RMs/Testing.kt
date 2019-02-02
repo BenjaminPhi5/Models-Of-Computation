@@ -144,15 +144,23 @@ fun testPop(){
 }
 
 fun testEncodeDecode(){
-    println("encoded value: ${encodeProgram(getAdd())}")
-    printProgram(getConst2())
+    println("encoded value: ${encodeProgram(getConst3())}")
+    printProgram(getConst3())
     println("-----------------\n--------------")
-    printProgram(decodeProgram(encodeProgram(getConst2())))
+    printProgram(decodeProgram(encodeProgram(getConst3())))
 }
 
-fun getConst2() : Array<Body> {
+fun getConst3() : Array<Body> {
     val l0 = BodyOp(Operation.ADD, 0, 1, null)
     val l1 = BodyOp(Operation.ADD, 0, 2, null)
+    val l2 = BodyOp(Operation.ADD, 0, 3, null)
+    val l3 = Body(Operation.HALT)
+    return arrayOf(l0, l1, l2, l3)
+}
+
+fun getAdd1() : Array<Body> {
+    val l0 = BodyOp(Operation.ADD, 0, 1, null)
+    val l1 = BodyOp(Operation.SUB, 1, 0, 2)
     val l2 = Body(Operation.HALT)
     return arrayOf(l0, l1, l2)
 }

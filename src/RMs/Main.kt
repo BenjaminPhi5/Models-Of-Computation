@@ -23,3 +23,7 @@ fun main(args: Array<String>) {
 
 }
 
+
+// TODO: the decode function doesnt work
+// the encoding is so massive, it doesnt even work for the add function (the encoding of add overflows)
+// however, it did compute add two 
