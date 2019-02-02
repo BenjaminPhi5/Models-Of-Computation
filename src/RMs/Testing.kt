@@ -67,9 +67,24 @@ fun testXmult4(){
 }
 
 fun testEnumValues(){
-    println(Registers.A.ordinal)
-    println(Registers.ANS.ordinal)
-    println(Registers.Z.ordinal)
+    println(Regs.A.ordinal)
+    println(Regs.ANS.ordinal)
+    println(Regs.Z.ordinal)
+}
+
+fun testSingleAlias() {
+    val add = getAdd()
+    val module = Module(add, hashMapOf(2 to 3))
+    module.mapAliases()
+
+    printProgram(module.prog)
+
+    val machine = RegisterMachine(module.prog, arrayOf(0,3,0,6), true)
+
+    machine.run()
+
+    println(machine.regs)
+
 }
 
 fun testCombineSinge(){

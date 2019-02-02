@@ -18,7 +18,7 @@ class Module(var prog: Array<Body>, val aliases : HashMap<Int, Int>){
         if(!aliases.isEmpty()){
 
             // first, makes a new prog to put the new reg code bodies in.
-            var progNew : Array<Body> = arrayOf()
+            var progNew : ArrayList<Body> = ArrayList()
             var b : Body
             var bOp : BodyOp
 
@@ -29,18 +29,21 @@ class Module(var prog: Array<Body>, val aliases : HashMap<Int, Int>){
                     bOp = b as BodyOp
 
                     if(bOp.reg in aliases)
-                        progNew[i] = BodyOp(b.op, aliases[b.reg]!!, b.l1, b.l2)
+                        progNew.add(BodyOp(b.op, aliases[b.reg]!!, b.l1, b.l2))
                         // the whole !! thing is probably not the correct way to do it,
                         // it converts the value to a type that cant be null and returns null if it is, I think
                         // need to read more about nulls in kotlin and correct use of !!
+                    else
+                        progNew.add(BodyOp(b.op, b.reg, b.l1, b.l2))
                 }
 
                 else{
-                    progNew[i] = Body(b.op)
+                    progNew.add(Body(b.op))
                 }
 
             }
-            prog = progNew
+
+            prog = progNew.toArray(arrayOfNulls(progNew.size))
         }
 
     }

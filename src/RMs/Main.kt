@@ -7,5 +7,6 @@ fun main(args: Array<String>) {
     testCombineSinge()
     testCombineMultipleAdd()
     testXmult4()
+    testSingleAlias()
 }
 
