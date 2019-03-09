@@ -15,7 +15,7 @@ val l5 = BodyOp(Operation.ADD, Regs.R.ordinal, 4, null)
 val l6 = Body(Operation.HALT)
 val assignSR = arrayOf(l0, l1, l2, l3, l4, l5, l6)
 
-// Push S to A, this performs (X, L) ::= (0, X::L), so it cons x onto head of L
+// Push S to A, this performs (X, Lambda) ::= (0, X::Lambda), so it cons x onto head of Lambda
 // and empties X
 val l7 = BodyOp(Operation.ADD, Regs.Z.ordinal, 1, null)
 val l8 = BodyOp(Operation.SUB, Regs.L.ordinal, 2, 3)
@@ -26,10 +26,10 @@ val l12 = BodyOp(Operation.SUB, Regs.X.ordinal, 1, 6)
 val l13 = Body(Operation.HALT)
 val xConsL = arrayOf(l7, l8, l9, l10, l11, l12, l13)
 
-/* Pop L to X, which gets the head off of L and puts it in X
-* Involves decoding the encoded L list and performs
-* if L = 0 then (X ::= 0; goto EXIT) else
-* let L = <<x,l>> in (X::= x; L::=l; goto HALT)
+/* Pop Lambda to X, which gets the head off of Lambda and puts it in X
+* Involves decoding the encoded Lambda list and performs
+* if Lambda = 0 then (X ::= 0; goto EXIT) else
+* let Lambda = <<x,l>> in (X::= x; Lambda::=l; goto HALT)
 * */
 val l14 = BodyOp(Operation.SUB, Regs.X.ordinal, 0, 1)
 val l15 = BodyOp(Operation.SUB, Regs.L.ordinal, 3, 2)

@@ -118,7 +118,7 @@ fun testCombineMultipleAdd(){
 
     println(machine.regs)
 }
-//enum class Regs{ANS, P, A,   PC, N, C, R, S,  T, Z, L, X}
+//enum class Regs{ANS, P, A,   PC, N, C, R, S,  T, Z, Lambda, X}
 // values i want{0,    0, 276, 0,  9, 0, 2, 34, 0, 0, 0, 0}
 
 fun testAssign(){
@@ -127,7 +127,7 @@ fun testAssign(){
     println(machine.regs)
     machine = RegisterMachine(assignPCN.prog, arrayOf(0,    0, 0, 0,  9, 0, 5, 3, 0, 0, 0, 0), true)
     machine.run()
-    println("{0  , P  , A  , PC , N  , C  , R  , S  , T  , Z  , L  , X  }")
+    println("{0  , P  , A  , PC , N  , C  , R  , S  , T  , Z  , Lambda  , X  }")
     println(machine.regs)
 }
 

@@ -1,6 +1,6 @@
 package RMs
 
-// NOTE goto doesn't technically exist in the reg machine abstraction, its just easier to use when combining register
+// NOTE goto doesn't technically exist in the reg machine Abstraction, its just easier to use when combining register
 // machines, as you don't have to go and update each label that points to an exit or halt inside a sub machine, just
 // replace each halt and exit with a goto instead. Semantically it achieves the same thing and so is a valid register
 // machine operation.
