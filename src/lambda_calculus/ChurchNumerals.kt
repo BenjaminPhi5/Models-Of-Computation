@@ -27,65 +27,66 @@ fun generateNumeral(n : Int) : Abstraction {
 
 fun isChurchNumeral(lambda : Lambda) : Boolean {
 
+    //check it is actually an abstraction, this is the λf abstraction
     if(lambda !is Abstraction)
         return false
 
-    // recurse into lambda, assuming always get this
-    // structure lambda x. (app
-    val f = lambda.variable
-    var inner: Abstraction = lambda.lambda as? Abstraction ?: return false
-    val x = inner.variable
-    // check inner.lambda is an application, if so second element is x, or its just 0
-    if(inner.lambda is Application) {
-        if ((inner.lambda as Application).input != x)
-            return false
-    }
-    else if(inner.lambda is Variable && inner.lambda != x)
+    // check its lambda is an abstraction, the λx abstraction
+    if(lambda.lambda !is Abstraction)
         return false
 
-    var current = inner.lambda
+    var inner : Abstraction = lambda.lambda as Abstraction
 
-    // if its numeral 0
-    if(current is Variable)
-        return true
-    // if its numeral 1
-    else if(current is Application){
-        if(current.func == f && current.input == x)
-            return true
-        current=current.func
-    }
+    // our f and x
+    val f = lambda.variable
+    val x = inner.variable
 
-    // for numerals greater than 1
-    while(current is Application){
-        if(current.input != f)
+    val list = ArrayList<Lambda>()
+
+    // get the list of child elements, recursing if we find an application
+    recurseNum(inner.lambda, list)
+
+    // check all elements other than last are our function f
+    for(i in 0 until list.size - 1)
+        if (list[i] != f)
             return false
 
-        else
-            current = current.input
-
-    }
-
-    return (current == f)
+    // check that the last element is x
+    return (list[list.lastIndex] == x)
 
 }
+
+private fun recurseNum(lambda: Lambda, list : ArrayList<Lambda>) {
+
+    // builds up a list of elements left to right
+    // only care about application children, if given other children it will show up during check
+    // after the fact
+
+    if(lambda is Application){
+        recurseNum(lambda.func, list)
+        recurseNum(lambda.input, list)
+    } else {
+        list.add(lambda)
+    }
+
+}
+
 
 // assumes you have already checked that the lambda is actually a church numeral
 fun getChurchNumeral(lambda: Abstraction) : Int {
 
-    if(lambda.lambda !is Abstraction) {
-        print("error, not a church numeral")
-        return 0
-    }
+    // MAKE SURE YOU USE THE BOOLEAN CHECK METHOD FIRST BEFORE USING THIS
 
-    val inner = (lambda.lambda as Abstraction).lambda
-    var current = inner
+    // get the inner variable
+    val inner : Lambda = ((lambda.lambda) as Abstraction).lambda
 
-    var count = 0
-    while(current is Application){
-        count++
-        current = current.func
-    }
+    // init the list
+    val list = ArrayList<Lambda>()
 
-    return count
+    // generate the list
+    recurseNum(inner, list)
+
+    // assumes list of form f f f .... f x (so size-1 f's gives the numeral value)
+    return list.size - 1
 
 }

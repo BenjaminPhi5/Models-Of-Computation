@@ -11,6 +11,7 @@ val succ = Abstraction(x1, Abstraction(f,  Abstraction(y, succinner)))
 
 fun main(args: Array<String>) {
 //    println(getChurchNumeral(generateNumeral(12)))
+//    println(prettyprint(generateNumeral(12)))
 //    println(getChurchNumeral(generateNumeral(0)))
 //    println(getChurchNumeral(generateNumeral(5)))
 //    println(getChurchNumeral(generateNumeral(1)))
@@ -18,7 +19,7 @@ fun main(args: Array<String>) {
 //    println(isChurchNumeral(generateNumeral(0)))
 //    println(isChurchNumeral(generateNumeral(5)))
 //    println(isChurchNumeral(generateNumeral(1)))
-    println(prettyprint(generateNumeral(5)))
+    println(prettyprintPrecedence(generateNumeral(5)))
     println("-------")
     val apply = Application(generateNumeral(2), Variable())
     reduceUntilPrint(apply, 10)
@@ -30,6 +31,8 @@ fun main(args: Array<String>) {
                             )
     )
 
+    println("----------")
+    println(prettyprint(reduceUntil(Application(succ, generateNumeral(2)), 100)))
     println(getChurchNumeral(
             reduceUntil(Application(succ, generateNumeral(3)), 100) as Abstraction))
 }

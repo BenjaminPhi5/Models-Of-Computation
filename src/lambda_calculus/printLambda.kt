@@ -50,6 +50,53 @@ fun prettyprint(lambda : Lambda) : String {
 
         }
         // generic lambda case not used
+        else -> return "i"
+    }
+
+}
+
+fun prettyprintPrecedence(lambda : Lambda) : String {
+
+
+    when (lambda) {
+    // VARIABLE CASE
+        is Variable -> {
+            if(lambda.notNamed())
+                lambda.setName(nextName())
+
+            return lambda.getName()
+
+        }
+
+    // APPLICATION CASE
+        is Application ->
+            return "(" + prettyprintPrecedence(lambda.func) + "-" + prettyprintPrecedence(lambda.input) + ")"
+
+    // ABSTRACTION CASE
+        is Abstraction -> {
+            var result = ""
+
+            // put opening bracket and lambda symbol
+            if(!inAbstraction)
+                result = "(λ "
+
+            // get inner variable
+            result += prettyprintPrecedence(lambda.variable) + " "
+
+            // check if inner lambda is an abstraction
+            inAbstraction = lambda.lambda is Abstraction
+
+            // if it isn't add dot before inner lambda add closing bracket at end of inner print and
+            result += if(!inAbstraction){
+                "." + prettyprintPrecedence(lambda.lambda) + ")"
+            } else
+                prettyprintPrecedence(lambda.lambda)
+
+            // return the combined string for the internal components of the abstraction
+            return result
+
+        }
+    // generic lambda case not used
         else -> return ""
     }
 
