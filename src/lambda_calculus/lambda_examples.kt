@@ -1,5 +1,7 @@
 package lambda_calculus
 
+// as it stands, this class is just for my testing
+
 val x = Variable()
 val identity = Abstraction(x,x)
 val zero = Abstraction(Variable(), identity)

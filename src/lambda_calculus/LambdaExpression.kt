@@ -4,13 +4,20 @@ private var reduced = false
 
 open class Lambda {
 
+    // reduce will be overridden by all classes extending lambda
+    // and will either reduce the expression if it can be reduced and returns the new result
+    // (reducing using normal order reduction)
     open fun reduce() : Lambda{
         return this
     }
 
+    // computes substitution
     fun substitution(bound : Variable, output : Lambda, argument : Lambda) : Lambda {
         reduced = true
 
+        // if substitution has occurred, the we know some reduction has occured, so set the reduction flag to true.
+       // replace a variable if the bound variable matches the output
+        // in an application or an abstraction, recursively call on their components.
         when (output) {
             is Variable -> return if(bound == output)
                 argument
@@ -33,8 +40,11 @@ open class Lambda {
     }
 }
 
+// the basic variable in the lambda calculus.
 class Variable : Lambda() {
 
+    // names can be assigned, used in pretty printing.
+    // only allows a name to be assigned if it has already been assigned.
     private var name : String? = null
 
     fun notNamed() : Boolean {
@@ -56,8 +66,13 @@ class Variable : Lambda() {
 
 }
 
+// an abstraction is a lambda of the form lambda x. M,
+/**
+ * @constructor takes the variable x and an output lambda lambda
+ */
 class Abstraction(val variable: Variable, var lambda: Lambda) : Lambda() {
 
+    // to reduce, reduce the lambda within
     override fun reduce() : Lambda{
         lambda = lambda.reduce()
         return this
@@ -97,6 +112,8 @@ class Application(var func : Lambda, var input : Lambda) : Lambda() {
 
 fun reduceUntilPrint(lambda: Lambda, reductions : Int) : Lambda {
 
+    // similar to the reduction function above, but prints the result of each reduction.
+
     println(prettyprint(lambda))
 
     var oldLambda = lambda
@@ -121,6 +138,10 @@ fun reduceUntil(lambda: Lambda, reductions: Int) : Lambda {
 
     var oldLambda = lambda
     var newLambda: Lambda = lambda
+
+    // reduce the equation continually until it cannot be reduced anymore
+    // or until the reductions cap has run out
+    // (since some reductions never reduce there is a cap, think the omega lambda = (λx.x x)(λx.x x) ).
 
     for(i in 0 until reductions) {
         newLambda = oldLambda.reduce()

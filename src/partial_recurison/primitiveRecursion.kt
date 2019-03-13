@@ -1,5 +1,8 @@
 package partial_recurison
 
+/**
+ * this class stores the recursive function
+ */
 class RecFunc : Op {
 
     var func = Op(0)
@@ -11,6 +14,14 @@ class RecFunc : Op {
     // here n is the number of elements the rec function takes, so normal n + 1
     //g(x, y, h(x,y))
 
+    /**
+     * This method computes the recursion, by taking the elements provided and calling the function using the
+     * arguments in
+     * @param list,
+     * @param h: This is the recusive function. A primitive recursive style function may actually not need it
+     * (may be using primitive recursion for flow control instead) and so it tries to execute the function func
+     * without explicitly calculating h.
+     */
     fun computeRec(list: ArrayList<Int>, size : Int, h : Op): Int {
         check(size+1)
 
@@ -31,6 +42,11 @@ class RecFunc : Op {
 
 class PrimitiveRecursion : Op {
 
+    // base case and recursive functions
+    // base takes one less argument that our normal function
+    // rec takes one more argument
+    // however, the last argument is a function with arguments passed in not an int and you may not need to
+    //calculate the last argument (see comments in above class)
     var base = Op(0)
     var rec =  RecFunc(0, Op(0))
 
@@ -43,6 +59,8 @@ class PrimitiveRecursion : Op {
         this.rec = rec
     }
 
+    // decides if to use the base case or the recursive case and calls their compute/computeRec functions
+    // respectively.
     override fun compute(list: ArrayList<Int>, size : Int): Int {
         check(size)
 

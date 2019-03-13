@@ -55,8 +55,11 @@ fun prettyprint(lambda : Lambda) : String {
 
 }
 
+
 fun prettyprintPrecedence(lambda : Lambda) : String {
 
+    // This is similar to the pretty printer, but puts the explicit order of application
+    // in the printed lambdas
 
     when (lambda) {
     // VARIABLE CASE
