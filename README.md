@@ -27,7 +27,7 @@ There is also fucntionality to compute the result of any contructed function. A 
 
 #### Register machines
 The code contains the ability to contruct register machine programs, with the following format:
-```[label] : [RegName]+ -> [nextlab1Name]``` or ```[label] : [RegName]- -> [nextLab1Name], [nextLab2Name]```
+```[label] : [RegName]+ -> [nextlab1Name]``` or ```[label] : [RegName]- -> [nextLab1Name], [nextLab2Name]``` eg:
 ```
 l0 : R1- -> l1, l2
 l1 : R0+ -> l0
