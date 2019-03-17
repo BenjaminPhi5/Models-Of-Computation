@@ -27,11 +27,14 @@ There is also fucntionality to compute the result of any contructed function. A 
 
 #### Register machines
 The code contains the ability to contruct register machine programs, with the following format:
-```l0 : R1- -> l1, l2```
-```l1 : R0+ -> l0```
-```l2 : R2- -> l3, l4```
-```l3 : R0+ -> l2```
-```l4 : HALT```
+```[label] : [RegName]+ -> [nextlab1Name]``` or ```[label] : [RegName]- -> [nextLab1Name], [nextLab2Name]```
+```
+l0 : R1- -> l1, l2
+l1 : R0+ -> l0
+l2 : R2- -> l3, l4
+l3 : R0+ -> l2
+l4 : HALT
+```
 
 Register machines can also be combined, and to acheieve flow control more nicely, the instructions EXIT and GOTO have been added (EXIT gives an alternate finishing state and GOTO allows combining machines together a bit easier, both of these are just simple abstractions on top of the standard register machine language).
 
